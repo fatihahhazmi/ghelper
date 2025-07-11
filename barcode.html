@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Barcode Finder</title>
+  <style>
+    :root {
+      font-size: 16px;
+      --green: #2e7d32;
+      --light-green: #66bb6a;
+      --accent: #00c853;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: var(--green);
+    }
+
+    .main {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .container {
+      background: #f1f8f5;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 36rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    label {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    input[type="text"] {
+      width: 60%;
+      padding: 0.5rem;
+      border: 1px solid var(--green);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      color: var(--green);
+      background: #fff;
+    }
+
+    input:focus {
+      outline: 2px solid var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background: var(--light-green);
+    }
+
+    .result, .admin-result {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      text-align: left;
+      color: var(--green);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid var(--green);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #e8f5e9;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      .input-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      input[type="text"] {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      label {
+        margin-bottom: 0.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main">
+    <div class="container">
+      <h1>🔍 Barcode Finder</h1>
+
+      <!-- Search Field -->
+      <div class="input-group">
+        <label for="search">Search Item</label>
+        <input type="text" id="search" placeholder="e.g. kasut, buku" />
+      </div>
+      <button onclick="findItems()">Search</button>
+
+      <div class="result" id="searchResult"></div>
+
+      <hr style="margin: 2rem 0;" />
+
+      <!-- Admin Entry -->
+      <h1 style="font-size: 1.5rem;">➕ Add Item</h1>
+
+      <div class="input-group">
+        <label for="admName">Item Name</label>
+        <input type="text" id="admName" placeholder="e.g. kasut" />
+      </div>
+      <div class="input-group">
+        <label for="admCode">Barcode</label>
+        <input type="text" id="admCode" placeholder="e.g. 1234567890" />
+      </div>
+      <div class="input-group">
+        <label for="admImg">Image URL</label>
+        <input type="text" id="admImg" placeholder="https://..." />
+      </div>
+      <button onclick="addItem()">Add Item</button>
+
+      <div class="admin-result" id="adminResult"></div>
+    </div>
+  </div>
+
+  <footer>
+    still in development. contact tehah for further
+  </footer>
+
+  <script>
+    let items = [
+      { name: 'kasut sukan', code: '1234567890123', img: 'https://via.placeholder.com/200x150?text=kasut' },
+      { name: 'buku nota', code: '9876543210987', img: 'https://via.placeholder.com/200x150?text=buku' }
+    ];
+
+    function findItems() {
+      const keyword = document.getElementById('search').value.trim().toLowerCase();
+      const resultDiv = document.getElementById('searchResult');
+      resultDiv.innerHTML = '';
+
+      if (!keyword) {
+        resultDiv.textContent = 'Sila masukkan kata kunci.';
+        return;
+      }
+
+      const found = items.filter(item => item.name.toLowerCase().includes(keyword));
+
+      if (found.length === 0) {
+        resultDiv.textContent = 'Tiada item dijumpai.';
+        return;
+      }
+
+      found.forEach(item => {
+        resultDiv.innerHTML += `
+          <div style="margin-bottom: 2rem;">
+            <strong>${item.name}</strong><br />
+            <img src="${item.img}" alt="${item.name}" /><br />
+            <label>Barcode:</label>
+            <input type="text" value="${item.code}" readonly style="width: 100%; margin-top: .5rem; padding: .5rem; font-size: 1rem;" />
+          </div>
+        `;
+      });
+    }
+
+    function addItem() {
+      const name = document.getElementById('admName').value.trim();
+      const code = document.getElementById('admCode').value.trim();
+      const img = document.getElementById('admImg').value.trim();
+      const result = document.getElementById('adminResult');
+
+      if (!name || !code) {
+        result.textContent = 'Nama dan barcode diperlukan.';
+        return;
+      }
+
+      items.push({
+        name,
+        code,
+        img: img || 'https://via.placeholder.com/200x150?text=Item'
+      });
+
+      result.textContent = `Item "${name}" berjaya ditambah.`;
+      document.getElementById('admName').value = '';
+      document.getElementById('admCode').value = '';
+      document.getElementById('admImg').value = '';
+    }
+  </script>
+
+</body>
+</html>

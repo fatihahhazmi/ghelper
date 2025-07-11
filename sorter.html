@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Money Sorter (RM)</title>
+  <style>
+    :root {
+      font-size: 16px;
+      --green: #2e7d32;
+      --light-green: #66bb6a;
+      --accent: #00c853;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: var(--green);
+    }
+
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      padding: 2rem;
+    }
+
+    .container {
+      background: #f1f8f5;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 32rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: var(--green);
+    }
+
+    .inputs {
+      margin-bottom: 2rem;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .input-group label {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .input-group input {
+      width: 8rem;
+      padding: 0.5rem;
+      border: 1px solid var(--green);
+      border-radius: 0.5rem;
+      text-align: right;
+      font-size: 1rem;
+      color: var(--green);
+      background: #ffffff;
+    }
+
+    .input-group input:focus {
+      outline: 2px solid var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--light-green);
+    }
+
+    .result {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--green);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #e8f5e9;
+      color: var(--green);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .input-group label {
+        font-size: 1rem;
+      }
+
+      .input-group input {
+        width: 6rem;
+        font-size: 0.9rem;
+      }
+
+      button {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+      }
+
+      .result {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main">
+    <div class="container">
+      <h1>💵 Money Sorter (RM)</h1>
+      <div class="inputs">
+        <!-- Notes -->
+        <div class="input-group"><label for="hundred">RM100</label><input type="number" id="hundred" value="0" min="0" /></div>
+        <div class="input-group"><label for="fifty">RM50</label><input type="number" id="fifty" value="0" min="0" /></div>
+        <div class="input-group"><label for="twenty">RM20</label><input type="number" id="twenty" value="0" min="0" /></div>
+        <div class="input-group"><label for="ten">RM10</label><input type="number" id="ten" value="0" min="0" /></div>
+        <div class="input-group"><label for="five">RM5</label><input type="number" id="five" value="0" min="0" /></div>
+        <div class="input-group"><label for="one">RM1</label><input type="number" id="one" value="0" min="0" /></div>
+
+        <!-- Coins -->
+        <div class="input-group"><label for="fiftysen">RM0.50</label><input type="number" id="fiftysen" value="0" min="0" /></div>
+        <div class="input-group"><label for="twentysen">RM0.20</label><input type="number" id="twentysen" value="0" min="0" /></div>
+        <div class="input-group"><label for="tensen">RM0.10</label><input type="number" id="tensen" value="0" min="0" /></div>
+        <div class="input-group"><label for="fivesen">RM0.05</label><input type="number" id="fivesen" value="0" min="0" /></div>
+      </div>
+
+      <button onclick="calculateTotal()">Calculate Total</button>
+      <div class="result">
+        Total: RM <span id="total">0.00</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    by tehah
+  </footer>
+
+  <script>
+    function calculateTotal() {
+      const get = id => parseFloat(document.getElementById(id).value) || 0;
+
+      const total = 
+        (get('hundred') * 100) +
+        (get('fifty') * 50) +
+        (get('twenty') * 20) +
+        (get('ten') * 10) +
+        (get('five') * 5) +
+        (get('one') * 1) +
+        (get('fiftysen') * 0.5) +
+        (get('twentysen') * 0.2) +
+        (get('tensen') * 0.1) +
+        (get('fivesen') * 0.05);
+
+      document.getElementById('total').innerText = total.toFixed(2);
+    }
+
+    // Keyboard navigation
+    const inputs = document.querySelectorAll('.input-group input');
+    inputs.forEach((input, index) => {
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (inputs[index + 1]) {
+            inputs[index + 1].focus();
+          } else {
+            document.querySelector('button').focus();
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
