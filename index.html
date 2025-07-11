@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GreenHelper - Mobile Based Solutions</title>
+  <style>
+    :root {
+      font-size: 16px;
+      --green: #2e7d32;
+      --light-green: #66bb6a;
+      --accent: #00c853;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: var(--green);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    header {
+      padding: 2rem 1rem 1rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--green);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .card {
+      background: #f1f8f5;
+      border-radius: 1rem;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .card:hover {
+      background: #e0f2f1;
+      transform: translateY(-5px);
+    }
+
+    .circle {
+      width: 4rem;
+      height: 4rem;
+      background: var(--accent);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      fill: white;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--green);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #e8f5e9;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 500px) {
+      .circle {
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>GreenHelper</h1>
+    <p style="margin-top: 0.5rem; font-size: 1rem;">Mobile Based Solutions</p>
+  </header>
+
+  <main>
+    <div class="grid">
+      <!-- Barcode Finder -->
+      <div class="card" onclick="location.href='barcode.html'">
+        <div class="circle" aria-label="Barcode Finder">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M19 4h-1v16h1a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-3 0h-1v16h1a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-4 0H8v16h4V4zm-6 0H4a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h1V4z"/>
+          </svg>
+        </div>
+        <div class="card-title">Barcode Finder</div>
+      </div>
+
+      <!-- Money Sorter -->
+      <div class="card" onclick="location.href='sorter.html'">
+        <div class="circle" aria-label="Money Sorter">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2zm0 8H4v-6h16v6zm-10-5a1 1 0 1 1 0 2h-1v1h1a1 1 0 1 1 0 2h-1v-1h-1v-2h2v-2h-1z"/>
+          </svg>
+        </div>
+        <div class="card-title">Money Sorter</div>
+      </div>
+
+      <!-- Coming Soon 1 -->
+      <div class="card" onclick="alert('Coming Soon ya ges ya')">
+        <div class="circle" aria-label="Coming Soon">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/>
+          </svg>
+        </div>
+        <div class="card-title">Coming Soon</div>
+      </div>
+
+      <!-- Coming Soon 2 -->
+      <div class="card" onclick="alert('Coming Soon ya ges ya')">
+        <div class="circle" aria-label="Coming Soon">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-1 15h2v-2h-2zm0-4h2V7h-2z"/>
+          </svg>
+        </div>
+        <div class="card-title">Coming Soon</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Made in Rumah
+  </footer>
+
+</body>
+</html>
