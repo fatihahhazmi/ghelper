@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -142,28 +143,32 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="main">
     <div class="container">
       <h1>💵 Money Sorter (RM)</h1>
       <div class="inputs">
+
         <!-- Notes -->
-        <div class="input-group"><label for="hundred">RM100</label><input type="number" id="hundred" value="0" min="0" /></div>
-        <div class="input-group"><label for="fifty">RM50</label><input type="number" id="fifty" value="0" min="0" /></div>
-        <div class="input-group"><label for="twenty">RM20</label><input type="number" id="twenty" value="0" min="0" /></div>
-        <div class="input-group"><label for="ten">RM10</label><input type="number" id="ten" value="0" min="0" /></div>
-        <div class="input-group"><label for="five">RM5</label><input type="number" id="five" value="0" min="0" /></div>
-        <div class="input-group"><label for="one">RM1</label><input type="number" id="one" value="0" min="0" /></div>
+        <div class="input-group"><label for="hundred">RM100</label><input type="number" id="hundred" placeholder="0" min="0" /></div>
+        <div class="input-group"><label for="fifty">RM50</label><input type="number" id="fifty" placeholder="0" min="0" /></div>
+        <div class="input-group"><label for="twenty">RM20</label><input type="number" id="twenty" placeholder="0" min="0" /></div>
+        <div class="input-group"><label for="ten">RM10</label><input type="number" id="ten" placeholder="0" min="0" /></div>
+        <div class="input-group"><label for="five">RM5</label><input type="number" id="five" placeholder="0" min="0" /></div>
+        <div class="input-group"><label for="one">RM1</label><input type="number" id="one" placeholder="0" min="0" /></div>
 
         <!-- Coins -->
-        <div class="input-group"><label for="fiftysen">RM0.50</label><input type="number" id="fiftysen" value="0" min="0" /></div>
-        <div class="input-group"><label for="twentysen">RM0.20</label><input type="number" id="twentysen" value="0" min="0" /></div>
-        <div class="input-group"><label for="tensen">RM0.10</label><input type="number" id="tensen" value="0" min="0" /></div>
-        <div class="input-group"><label for="fivesen">RM0.05</label><input type="number" id="fivesen" value="0" min="0" /></div>
+        <div class="input-group"><label for="fiftysen">RM0.50</label><input type="number" id="fiftysen" placeholder="0" min="0" /></div>
+        <div class="input-group"><label for="twentysen">RM0.20</label><input type="number" id="twentysen" placeholder="0" min="0" /></div>
+        <div class="input-group"><label for="tensen">RM0.10</label><input type="number" id="tensen" placeholder="0" min="0" /></div>
+        <div class="input-group"><label for="fivesen">RM0.05</label><input type="number" id="fivesen" placeholder="0" min="0" /></div>
+
       </div>
 
       <button onclick="calculateTotal()">Calculate Total</button>
+
       <div class="result">
         Total: RM <span id="total">0.00</span>
       </div>
@@ -198,9 +203,9 @@
     inputs.forEach((input, index) => {
       input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === 'ArrowDown') {
-          e.preventDefault();
+          e.preventDefault(); 
           if (inputs[index + 1]) {
-            inputs[index + 1].focus();
+            inputs[index + 1].focus(); 
           } else {
             document.querySelector('button').focus();
           }
